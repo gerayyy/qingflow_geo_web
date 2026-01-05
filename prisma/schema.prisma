@@ -1,0 +1,28 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum PostStatus {
+  draft
+  published
+  archived
+}
+
+model Post {
+  id          Int        @id @default(autoincrement())
+  slug        String     @unique @db.VarChar(191)
+  title       String     @db.VarChar(255)
+  summary     String     @db.Text
+  status      PostStatus @default(published)
+  publishedAt DateTime
+  content     Json
+  geoData     Json?
+  seoMeta     Json?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+}

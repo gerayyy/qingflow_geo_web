@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  # Next.js 应用服务
+  app:
+    image: cr.volces.com/01/web:1.0.0  # 指定使用的镜像名称
+    container_name: web
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env.example  # 环境变量配置文件，默认使用当前 yml 文件夹的 .env.example
+    environment:
+      - NODE_ENV=production  # 覆盖环境文件中的开发环境配置
+    restart: unless-stopped
+    networks:
+      - helyweb_network
+
+networks:
+  helyweb_network:
+    name: helyweb_network
+    driver: bridge
