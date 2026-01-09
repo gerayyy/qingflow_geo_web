@@ -57,7 +57,7 @@ echo ""
 
 # 执行构建命令
 echo "开始构建镜像..."
-docker build -t "${IMAGE_NAME}:${VERSION}" -f Dockerfile ..
+docker build -t "${IMAGE_NAME}:${VERSION}" -f docker/Dockerfile .
 
 # 检查构建结果
 if [ $? -eq 0 ]; then
